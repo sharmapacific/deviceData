@@ -1,0 +1,47 @@
+{% extends "account/base.html" %}
+{% block body_block %}
+<div class="container">
+  <div class="jumbotron">
+
+    {% if user.is_authenticated %}
+        <h1>Hey {{ user.username|title }} !</h1> <h2>Welcome, How are you today.</h2>
+        <hr>
+        <table class="table table-responsive table-striped">
+            <tbody>
+               <tr>
+                 <td>Click to download Entire Json</td>
+                 <td><a href="{% url 'activity:entire_data' %}?type=json">Json Data</a></td>
+                 <td>Click to download Aggregate CSV</td>
+                 <td><a href="{% url 'activity:agg_data' %}">Aggregate Data</a></td>
+               </tr>
+               <tr></tr>
+               <tr>
+                 <td>Click to download Segmented CSV</td>
+                 <td><a href="{% url 'activity:seg_data' %}">Segmented Data</a></td>
+                 <td>Hourly Segment Range</td>
+                 <td>
+                   <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{% url 'activity:range_data' %}">
+                       {% csrf_token %}
+                       <input type="datetime-local" id="hour_seg" name="hour_seg">
+                       <select name="timezone" id="timezone">
+                            <option value="UTC">TimeZone</option>
+                            <option value="Asia/Kolkata">Asia/Kolkata</option>
+                            <option value="US/Pacific">US/Pacific</option>
+                            <option value="America/New_York">America/New_York</option>
+                            <option value="Europe/Warsaw">Europe/Warsaw</option>
+                        </select>
+
+                       <input type="submit">
+                   </form>
+                 </td>
+               </tr>
+             </tbody>
+        </table>
+
+    {% else %}
+        <h2>Register or Login if you'd like to</h2>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
