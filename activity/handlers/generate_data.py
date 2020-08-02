@@ -1,7 +1,13 @@
+import asyncio
+
 import logging
 import os
 import random
 import time
+import threading
+from multiprocessing import Pool
+from multiprocessing import Process
+
 
 from activity.constants import ACTIVITY, HEART_RATE, RESPIRATION_RATE, USER_ID
 from activity.models import DeviceModel
@@ -42,10 +48,13 @@ class DeviceData:
                 data = self.generate_data()
                 DeviceModel.objects.create(**data)
                 time.sleep(1)
-            return True, {'message': 'Generated Successfully'}
         except Exception as e:
             logger.error('Exception-{}'.format(e))
-            return False, {'message': 'Unable to Generat'}
+
+    def process_data(self, limit):
+        """generation and insertion of data asynchronously"""
+        threading.Thread(target=self.insert_to_db, args=(limit,)).start()
+        return True, {'message': 'Data Generation in process'}
 
     def aggregate_value(self, file_path):
         """

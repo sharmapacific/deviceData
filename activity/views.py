@@ -93,5 +93,5 @@ class GenerateDataView(APIView):
     def post(self, request):
         data = request.data
         limit = data.get('range')
-        response, content = DeviceData().insert_to_db(limit)
+        response, content = DeviceData().process_data(limit)
         return Response(content)

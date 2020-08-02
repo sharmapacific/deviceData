@@ -1,0 +1,4 @@
+2020-08-02 11:52:09,837 - [INFO] - Activity - activity.handlers.generate_data - (generate_data.py).aggregate_value(79) - user - xyz
+2020-08-02 11:52:09,840 - [INFO] - Activity - activity.handlers.generate_data - (generate_data.py).aggregate_value(79) - user - abc
+2020-08-02 11:52:53,303 - [INFO] - Activity - activity.handlers.generate_data - (generate_data.py).segment_value(119) - user - xyz
+2020-08-02 11:52:53,361 - [INFO] - Activity - activity.handlers.generate_data - (generate_data.py).segment_value(119) - user - abc
